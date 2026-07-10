@@ -5,6 +5,14 @@
 
 Lean code, lean words, no AI slop.
 
+## Why Leanman?
+
+AI assistants over-build. They add abstractions you don't need, import libs they already have, explain the obvious, qualify every claim, and write prose that sounds like a press release.
+
+You fix output on two fronts: the code and the explanation. That's two contexts to hold, two fights per prompt. One dial that controls both costs less.
+
+Leanman merges three existing approaches into one toggle. Code side: ponytail's ladder (YAGNI, stdlib, native, one line). Prose side: caveman's terseness + stop-slop's anti-AI tells. No dual-wielding. Set the level, both follow.
+
 **Merges three sources:**
 
 - **[ponytail](https://github.com/DietrichGebert/ponytail)** -- code minimalism ladder. YAGNI first, stdlib second, native third, one line over one file.
