@@ -1,5 +1,8 @@
 # leanman
 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![GitHub Repo stars](https://img.shields.io/github/stars/VonAntaraxia/leanman?style=flat&logo=github)
+
 Lean code, lean words, no AI slop.
 
 **Merges three sources:**
