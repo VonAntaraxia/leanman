@@ -1,7 +1,7 @@
 # leanman
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![GitHub Repo stars](https://img.shields.io/github/stars/VonAntaraxia/leanman?style=flat&logo=github)
+![GitHub Repo stars](https://img.shields.io/badge/stars-private-8A2BE2?style=flat&logo=github)
 
 Lean code, lean words, no AI slop.
 
