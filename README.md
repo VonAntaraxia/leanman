@@ -1,0 +1,94 @@
+# leanman
+
+Lean code, lean words, no AI slop.
+
+**Merges three sources:**
+
+- **[ponytail](https://github.com/DietrichGebert/ponytail)** -- code minimalism ladder. YAGNI first, stdlib second, native third, one line over one file.
+- **[caveman](https://github.com/VonAntaraxia/caveman)** -- terse prose. Fragments OK. No pleasantries. No self-reference.
+- **[stop-slop](https://github.com/hvpandya/stop-slop)** -- kill AI tells. No filler, no passive, no formulaic structures, no em-dashes, no hand-holding.
+
+---
+
+## leanman
+
+Controls two axes under one dial.
+
+### Code (the ladder)
+
+Stop at first rung that holds:
+
+1. This need to exist? (YAGNI)
+2. Already in codebase? Reuse.
+3. Stdlib does it? Use it.
+4. Native platform covers it? Pick that.
+5. Installed dep solves it? That.
+6. One line? One line.
+7. Minimum code that works.
+
+Three levels: **lite** (prefer simple), **full** (ladder enforced, default), **ultra** (deletion first).
+
+### Prose (anti-slop)
+
+Three layers. Level controls terseness; slop rules apply at all levels.
+
+**Full** drops filler + articles + fragments OK + short synonyms. **Ultra** drops to bare fragments.
+
+Slop rules: no filler adverbs, no passive, no binary contrasts, no throat-clearing, no rhetorical setups, no false agency, no em-dashes, no hand-holding, no pull-quote language, no meta-joiners.
+
+### Output
+
+Code first. Then max 3 lines: what skipped, when add, risk.
+
+```
+[code]: skipped [X], add when [Y].
+```
+
+### Commands
+
+- `/leanman lite|full|ultra` -- set level
+- `<skill>` in agent prompt -- activate
+- `stop leanman` / `normal mode` -- revert
+
+---
+
+## leanman-review
+
+Two-track review. One line per finding.
+
+**Code track:** tags `delete:`, `stdlib:`, `native:`, `dep:`, `yagni:`, `shrink:`.
+**Prose track:** tag `slop:` with the tell name.
+
+Output per file: Code Leanness 1-10 + Prose Authenticity 1-10 + Prose Density 1-10 + Code Directness 1-10 = /40. Under 28: REVISE.
+
+Caveman mode: terse output. Optional severity prefixes: `bug:`, `risk:`, `nit:`, `q:`.
+
+### Commands
+
+- `/leanman-review` -- review staged/uncommitted changes
+- `<skill name="leanman-review">` in agent prompt -- activate
+- `leanman-review --all` -- full codebase scan
+
+---
+
+## Install
+
+```json
+// .mcp.json or agent config
+{
+  "skills": {
+    "leanman": "github:VonAntaraxia/leanman"
+  }
+}
+```
+
+Or clone this repo into `.agents/skills/`:
+
+```bash
+npx skills add https://github.com/VonAntaraxia/leanman --skill leanman --yes
+npx skills add https://github.com/VonAntaraxia/leanman --skill leanman-review --yes
+```
+
+## License
+
+MIT
