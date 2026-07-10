@@ -1,0 +1,23 @@
+{
+"$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+"name": "leanman",
+"description": "Lean code + anti-slop prose. Combines code minimalism ladder with anti-AI-tell rules.",
+"owner": {
+"name": "VonAntaraxia",
+"url": "https://github.com/VonAntaraxia"
+},
+"plugins": [
+{
+"name": "leanman",
+"description": "Forces lean code and anti-slop prose. YAGNI, stdlib first, no filler.",
+"source": "./",
+"category": "productivity"
+},
+{
+"name": "leanman-review",
+"description": "Two-track review: code over-engineering + prose AI-slop.",
+"source": "./leanman-review/",
+"category": "code-review"
+}
+]
+}

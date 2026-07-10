@@ -1,0 +1,44 @@
+{
+"hooks": {
+"SessionStart": [
+{
+"matcher": "startup|resume|clear|compact",
+"hooks": [
+{
+"type": "command",
+"command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/leanman-activate.js\"",
+"commandWindows": "if (Get-Command node -ErrorAction SilentlyContinue) { node \"$env:CLAUDE_PLUGIN_ROOT\\hooks\\leanman-activate.js\" }",
+"timeout": 5,
+"statusMessage": "Loading leanman mode..."
+}
+]
+}
+],
+"SubagentStart": [
+{
+"hooks": [
+{
+"type": "command",
+"command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/leanman-subagent.js\"",
+"commandWindows": "if (Get-Command node -ErrorAction SilentlyContinue) { node \"$env:CLAUDE_PLUGIN_ROOT\\hooks\\leanman-subagent.js\" }",
+"timeout": 5,
+"statusMessage": "Loading leanman mode..."
+}
+]
+}
+],
+"UserPromptSubmit": [
+{
+"hooks": [
+{
+"type": "command",
+"command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/leanman-mode-tracker.js\"",
+"commandWindows": "if (Get-Command node -ErrorAction SilentlyContinue) { node \"$env:CLAUDE_PLUGIN_ROOT\\hooks\\leanman-mode-tracker.js\" }",
+"timeout": 5,
+"statusMessage": "Tracking leanman mode..."
+}
+]
+}
+]
+}
+}

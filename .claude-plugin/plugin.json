@@ -1,0 +1,10 @@
+{
+"name": "leanman",
+"version": "1.0.0",
+"description": "Lean code + anti-slop prose in one dial. Writes minimal code and explains it in short human-sounding prose.",
+"author": {
+"name": "VonAntaraxia",
+"url": "https://github.com/VonAntaraxia"
+},
+"hooks": "./hooks/leanman-hooks.json"
+}

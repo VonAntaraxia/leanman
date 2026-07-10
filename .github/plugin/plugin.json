@@ -1,0 +1,16 @@
+{
+"name": "leanman",
+"description": "Lean code + anti-slop prose. Writes minimal code and explains it in short human-sounding prose.",
+"version": "1.0.0",
+"author": {
+"name": "VonAntaraxia",
+"url": "https://github.com/VonAntaraxia"
+},
+"homepage": "https://github.com/VonAntaraxia/leanman",
+"repository": "https://github.com/VonAntaraxia/leanman",
+"license": "MIT",
+"keywords": ["lean", "yagni", "anti-slop", "prose", "minimalism"],
+"commands": "commands/",
+"skills": ".",
+"hooks": "hooks/leanman-hooks.json"
+}

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leanman Demo — Before / After</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0d0d0d;
+    color: #e0e0e0;
+    line-height: 1.6;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  header { text-align: center; padding: 3rem 0 2rem; border-bottom: 1px solid #222; margin-bottom: 3rem; }
+  header h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em; }
+  header h1 span { color: #a0d468; }
+  header p { color: #888; margin-top: 0.5rem; font-size: 1.05rem; }
+  header .badge {
+    display: inline-block; margin-top: 1rem; padding: 0.3rem 0.8rem;
+    background: #1a1a1a; border: 1px solid #333; border-radius: 99px;
+    font-size: 0.8rem; color: #999;
+  }
+
+  .intro {
+    background: #151515; border: 1px solid #222; border-radius: 12px;
+    padding: 1.5rem 2rem; margin-bottom: 3rem; text-align: center;
+  }
+  .intro .stats { display: flex; justify-content: center; gap: 2.5rem; margin-top: 1rem; flex-wrap: wrap; }
+  .intro .stat { text-align: center; }
+  .intro .stat-num { font-size: 1.8rem; font-weight: 700; color: #a0d468; }
+  .intro .stat-label { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .scenario { margin-bottom: 2.5rem; }
+  .scenario-header {
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+    padding: 0.75rem 1.25rem; background: #141414; border-radius: 8px;
+    border-left: 3px solid #a0d468;
+  }
+  .scenario-header h2 { font-size: 1rem; font-weight: 600; }
+  .scenario-header .tag {
+    font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 4px;
+    background: #222; color: #888; text-transform: uppercase; letter-spacing: 0.03em;
+  }
+
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 640px) { .pair { grid-template-columns: 1fr; } }
+
+  .card {
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid #222; position: relative;
+  }
+  .card-before { border-color: #3a1a1a; }
+  .card-after { border-color: #1a3a1a; }
+
+  .card-label {
+    padding: 0.4rem 1rem; font-size: 0.7rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .card-before .card-label { background: #2a0a0a; color: #e06060; }
+  .card-after .card-label { background: #0a2a0a; color: #60e060; }
+
+  .card-body {
+    padding: 1rem 1rem; font-size: 0.85rem; line-height: 1.6;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  }
+  .card-before .card-body { background: #120808; color: #c0a0a0; }
+  .card-after .card-body { background: #081208; color: #a0c0a0; }
+  .card-body code {
+    background: rgba(255,255,255,0.06); padding: 0.1em 0.3em;
+    border-radius: 3px; font-size: 0.82em;
+  }
+  .card-body .hl { color: #d4a060; }
+
+  .token-count {
+    padding: 0.3rem 1rem 0.5rem; font-size: 0.7rem; color: #555;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .card-before .token-count { background: #120808; }
+  .card-after .token-count { background: #081208; }
+  .token-count .saved { color: #a0d468; }
+
+  .levels {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; margin: 3rem 0;
+  }
+  .level-card {
+    background: #141414; border: 1px solid #222; border-radius: 8px;
+    padding: 1.25rem;
+  }
+  .level-card h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .level-card .example { font-size: 0.8rem; color: #999; margin-top: 0.5rem; }
+  .level-card .example em { color: #a0d468; font-style: normal; }
+
+  .levels-title { text-align: center; font-size: 1.2rem; font-weight: 600; margin: 3rem 0 1.5rem; }
+
+  footer {
+    text-align: center; padding: 2rem 0 1rem;
+    border-top: 1px solid #222; margin-top: 3rem;
+    font-size: 0.8rem; color: #555;
+  }
+  footer a { color: #888; text-decoration: none; }
+  footer a:hover { color: #a0d468; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1><span>Leanman</span> Demo</h1>
+  <p>Code minimalism + anti-slop prose + caveman compression. Same answers, fewer tokens.</p>
+  <div class="badge">ponytail · stop-slop · caveman</div>
+</header>
+
+<div class="intro">
+  <p>Normal agent responses vs leanman — across real coding scenarios.</p>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">~65%</div>
+      <div class="stat-label">Fewer output tokens</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Technical accuracy</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Intensity levels</div>
+    </div>
+  </div>
+</div>
+
+<!-- Scenario 1 -->
+<div class="scenario">
+  <div class="scenario-header">
+    <h2>Debug React re-render bug</h2>
+    <span class="tag">debugging</span>
+    <span class="tag">React</span>
+  </div>
+  <div class="pair">
+    <div class="card card-before">
+      <div class="card-label">Normal agent</div>
+      <div class="card-body">The reason your React component is re-rendering is likely because you're creating a new object reference on each render cycle. When you pass an inline object as a prop, React's shallow comparison sees it as a different object every time, which triggers a re-render. I'd recommend using useMemo to memoize the object.</div>
+      <div class="token-count">~70 tokens</div>
+    </div>
+    <div class="card card-after">
+      <div class="card-label">Leanman</div>
+      <div class="card-body">New object ref each render. Inline object prop = new ref = re-render. Wrap in <code>useMemo</code>.</div>
+      <div class="token-count">~18 tokens <span class="saved">(74% fewer)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Scenario 2 -->
+<div class="scenario">
+  <div class="scenario-header">
+    <h2>Fix auth middleware token expiry</h2>
+    <span class="tag">bug fix</span>
+    <span class="tag">Node.js</span>
+  </div>
+  <div class="pair">
+    <div class="card card-before">
+      <div class="card-label">Normal agent</div>
+      <div class="card-body">Sure! I'd be happy to help you with that. The issue you're experiencing is most likely caused by your authentication middleware not properly validating the token expiry. Let me take a look and suggest a fix.</div>
+      <div class="token-count">~42 tokens</div>
+    </div>
+    <div class="card card-after">
+      <div class="card-label">Leanman</div>
+      <div class="card-body">Bug in auth middleware. Token expiry check uses <code>&lt;</code> not <code>&lt;=</code>. Fix:</div>
+      <div class="token-count">~13 tokens <span class="saved">(69% fewer)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Scenario 3 -->
+<div class="scenario">
+  <div class="scenario-header">
+    <h2>Set up PostgreSQL connection pool</h2>
+    <span class="tag">setup</span>
+    <span class="tag">database</span>
+  </div>
+  <div class="pair">
+    <div class="card card-before">
+      <div class="card-label">Normal agent</div>
+      <div class="card-body">Of course! Setting up a PostgreSQL connection pool in Node.js is fairly straightforward. The first thing you'll want to do is install the <code>pg</code> package. Then you can create a new Pool instance with your database configuration options.</div>
+      <div class="token-count">~38 tokens</div>
+    </div>
+    <div class="card card-after">
+      <div class="card-label">Leanman</div>
+      <div class="card-body">Install <code>pg</code>. Create Pool with DB config. Pool handles connections.</div>
+      <div class="token-count">~12 tokens <span class="saved">(68% fewer)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Scenario 4 -->
+<div class="scenario">
+  <div class="scenario-header">
+    <h2>Review PR for security vulnerability</h2>
+    <span class="tag">code review</span>
+    <span class="tag">security</span>
+  </div>
+  <div class="pair">
+    <div class="card card-before">
+      <div class="card-label">Normal agent</div>
+      <div class="card-body">I've reviewed the PR and found a critical security concern. It appears that user input is being passed directly into an SQL query without sanitization. This could lead to an SQL injection attack. I would strongly recommend using parameterized queries instead.</div>
+      <div class="token-count">~48 tokens</div>
+    </div>
+    <div class="card card-after">
+      <div class="card-label">Leanman</div>
+      <div class="card-body"><span class="hl">L42: bug:</span> SQL injection. User input concatenated into query. Use parameterized query.</div>
+      <div class="token-count">~16 tokens <span class="saved">(67% fewer)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Scenario 5 -->
+<div class="scenario">
+  <div class="scenario-header">
+    <h2>Explain git rebase vs merge</h2>
+    <span class="tag">explain</span>
+    <span class="tag">git</span>
+  </div>
+  <div class="pair">
+    <div class="card card-before">
+      <div class="card-label">Normal agent</div>
+      <div class="card-body">The main difference between git rebase and git merge is that merge creates a new commit that combines the histories of two branches, preserving the complete history. Rebase, on the other hand, rewrites the commit history by applying commits from one branch onto the tip of another.</div>
+      <div class="token-count">~55 tokens</div>
+    </div>
+    <div class="card card-after">
+      <div class="card-label">Leanman</div>
+      <div class="card-body">Merge: new commit, preserves history. Rebase: rewrites commits onto tip, linear history. Use merge for public branches, rebase for local cleanup.</div>
+      <div class="token-count">~22 tokens <span class="saved">(60% fewer)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Scenario 6 -->
+<div class="scenario">
+  <div class="scenario-header">
+    <h2>Implement React error boundary</h2>
+    <span class="tag">implementation</span>
+    <span class="tag">React</span>
+  </div>
+  <div class="pair">
+    <div class="card card-before">
+      <div class="card-label">Normal agent</div>
+      <div class="card-body">To implement an error boundary in React, you'll need to create a class component that implements either componentDidCatch or getDerivedStateFromError lifecycle methods. This will allow you to catch JavaScript errors anywhere in the child component tree and display a fallback UI instead of crashing the entire application.</div>
+      <div class="token-count">~60 tokens</div>
+    </div>
+    <div class="card card-after">
+      <div class="card-label">Leanman</div>
+      <div class="card-body">Class component with <code>getDerivedStateFromError</code> + <code>componentDidCatch</code>. Catches render errors. Shows fallback UI.</div>
+      <div class="token-count">~14 tokens <span class="saved">(77% fewer)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Scenario 7 -->
+<div class="scenario">
+  <div class="scenario-header">
+    <h2>Add a date picker</h2>
+    <span class="tag">YAGNI</span>
+    <span class="tag">HTML</span>
+  </div>
+  <div class="pair">
+    <div class="card card-before">
+      <div class="card-label">Normal agent</div>
+      <div class="card-body">You should install a date picker library like flatpickr or react-datepicker. Then import the library, set up the component with the necessary configuration options, and add a stylesheet for the styling. Make sure to handle edge cases like timezones and localization.</div>
+      <div class="token-count">~45 tokens</div>
+    </div>
+    <div class="card card-after">
+      <div class="card-label">Leanman</div>
+      <div class="card-body"><code>&lt;input type="date"&gt;</code><br><br>Native input. No lib.</div>
+      <div class="token-count">~6 tokens <span class="saved">(87% fewer)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Scenario 8: Auto-clarity -->
+<div class="scenario">
+  <div class="scenario-header">
+    <h2>Drop users table (auto-clarity)</h2>
+    <span class="tag">security</span>
+    <span class="tag">boundary</span>
+  </div>
+  <div class="pair">
+    <div class="card card-before">
+      <div class="card-label">Wrong (compressed, ambiguous)</div>
+      <div class="card-body">Drop users. No undo. Sure?</div>
+      <div class="token-count">~6 tokens</div>
+    </div>
+    <div class="card card-after">
+      <div class="card-label">Leanman (full clarity — auto-clarity)</div>
+      <div class="card-body"><span class="hl">Warning:</span> This permanently deletes all rows in <code>users</code> table. Cannot undo.<br><br><code>DROP TABLE users;</code><br><br>Verify backup exists first.</div>
+      <div class="token-count">~18 tokens</div>
+    </div>
+  </div>
+</div>
+
+<!-- Levels -->
+<div class="levels-title">Intensity Levels</div>
+<div class="levels">
+  <div class="level-card">
+    <h3>Lite</h3>
+    <p>No filler, no hedging. Keep articles + full sentences. Professional but tight.</p>
+    <div class="example">: Wrap object in useMemo. New ref created every render.</div>
+  </div>
+  <div class="level-card">
+    <h3>Full <span style="color:#a0d468;font-size:0.7rem;">(default)</span></h3>
+    <p>Drop articles, fragments OK, short synonyms. Classic caveman.</p>
+    <div class="example">: New ref each render. Wrap object in useMemo.</div>
+  </div>
+  <div class="level-card">
+    <h3>Ultra</h3>
+    <p>Bare fragments. One word when one word does it.</p>
+    <div class="example">: New ref/render. useMemo it.</div>
+  </div>
+  <div class="level-card">
+    <h3>Wenyan-lite</h3>
+    <p>Semi-classical Chinese. Drop filler, keep grammar.</p>
+    <div class="example">: 組件頻重繪，以每繪新生對象參照故。以 useMemo 包之。</div>
+  </div>
+  <div class="level-card">
+    <h3>Wenyan-full</h3>
+    <p>Maximum 文言文. 80-90% character reduction.</p>
+    <div class="example">: 每繪新生對象參照，故重繪；以 useMemo 包之則免。</div>
+  </div>
+  <div class="level-card">
+    <h3>Wenyan-ultra</h3>
+    <p>Extreme classical abbreviation.</p>
+    <div class="example">: 新參照則重繪。useMemo 包之。</div>
+  </div>
+</div>
+
+<footer>
+  Leanman — merges <a href="https://github.com/DietrichGebert/ponytail">ponytail</a> · <a href="https://github.com/VonAntaraxia/stop-slop">stop-slop</a> · <a href="https://github.com/JuliusBrussee/caveman">caveman</a><br>
+  MIT license
+</footer>
+
+</div>
+</body>
+</html>
