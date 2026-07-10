@@ -12,7 +12,7 @@ Lean code, lean words, no AI slop.
 
 ## leanman
 
-Controls two axes under one dial.
+Controls two axes.
 
 ### Code (the ladder)
 
@@ -32,9 +32,11 @@ Three levels: **lite** (prefer simple), **full** (ladder enforced, default), **u
 
 Three layers. Level controls terseness; slop rules apply at all levels.
 
-**Full** drops filler + articles + fragments OK + short synonyms. **Ultra** drops to bare fragments.
+**Lite:** drops filler, hedging, pleasantries. Professional but tight.
+**Full:** above + drops articles, fragments OK, short synonyms.
+**Ultra:** bare fragments. One word if one word does it.
 
-Slop rules: no filler adverbs, no passive, no binary contrasts, no throat-clearing, no rhetorical setups, no false agency, no em-dashes, no hand-holding, no pull-quote language, no meta-joiners.
+Slop rules all levels: no filler adverbs, no passive, no binary contrasts, no throat-clearing, no rhetorical setups, no false agency, no em-dashes, no hand-holding, no pull-quote language, no meta-joiners.
 
 ### Output
 
@@ -59,7 +61,7 @@ Two-track review. One line per finding.
 **Code track:** tags `delete:`, `stdlib:`, `native:`, `dep:`, `yagni:`, `shrink:`.
 **Prose track:** tag `slop:` with the tell name.
 
-Output per file: Code Leanness 1-10 + Prose Authenticity 1-10 + Prose Density 1-10 + Code Directness 1-10 = /40. Under 28: REVISE.
+Score per file: Code Leanness 1-10 + Code Directness 1-10 + Prose Authenticity 1-10 + Prose Density 1-10 = /40. Under 28: REVISE.
 
 Caveman mode: terse output. Optional severity prefixes: `bug:`, `risk:`, `nit:`, `q:`.
 
