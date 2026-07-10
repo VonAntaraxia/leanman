@@ -1,0 +1,20 @@
+{
+"name": "leanman",
+"description": "Lean code + anti-slop prose for AI agents.",
+"owner": {
+"name": "VonAntaraxia",
+"url": "https://github.com/VonAntaraxia"
+},
+"plugins": [
+{
+"name": "leanman",
+"description": "Forces lean code and anti-slop prose. YAGNI, stdlib first, no filler.",
+"source": "./",
+"category": "productivity",
+"tags": ["lean", "yagni", "anti-slop", "prose", "minimalism"],
+"commands": "commands/",
+"skills": ".",
+"hooks": "hooks/leanman-hooks.json"
+}
+]
+}
